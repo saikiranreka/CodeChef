@@ -10,7 +10,7 @@ class LEBOMBS {
 	public static void main(String[] args) throws NumberFormatException,
 			IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		// PrintWriter out = new PrintWriter(System.out);
+		PrintWriter out = new PrintWriter(System.out);
 		int n = Integer.parseInt(br.readLine().trim());
 		for (int i = 0; i < n; i++) {
 			int len = Integer.parseInt(br.readLine().trim());
@@ -18,23 +18,21 @@ class LEBOMBS {
 			int count = 0;
 			char[] t = br.readLine().trim().toCharArray();
 			for (int j = 0; j < len; j++) {
-				if (j == 0) {
-					if (t[j] == '1' || t[j + 1] == '1') {
-						count++;
-					}
-				} else if (j > 0 && j + 1 < len) {
-					if (t[j - 1] == '1' || t[j] == '1' || t[j + 1] == '1') {
-						count++;
-					}
-				} else {
-					if (t[j - 1] == '1' || t[j] == '1') {
-						count++;
-					}
+				boolean flag = true;
+				if (t[j] == '1') {
+					flag = false;
+				} else if (j > 0 && t[j - 1] == '1') {
+					flag = false;
+				} else if (j < len - 1 && t[j + 1] == '1') {
+					flag = false;
+				}
+				if (flag == true) {
+					count++;
 				}
 			}
-			System.out.println(len - count);
+			out.println(count);
 		}
-		// out.close();
+		out.close();
 	}
 
 }
